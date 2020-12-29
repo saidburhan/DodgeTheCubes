@@ -5,14 +5,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    
+    // engellerin burada olmasından emin değilim.. 
+    // şimdilik animatörlerle prototipleyeyim onları daha sonra kodlarla bi çaresine bakarız performansa göree...
 
     // bir takım ayar değişkenleri
     private float playerSpeed = 3f;
-    private float obstacleSpeed = 1f;
-    private int obsNo;
-    private int obsReact;
-    private int score=0;
+   // private float obstacleSpeed = 1f;
+    private float obsInterval; // İki obs arası harekette geçecek olan süre.. random olacak..
+
+    private int obsNo; // harekete geçireceğim engelin indisi olsun
+   // private int obsReact; // engelin hareket tarzı..
+    private int score=0; 
 
     [SerializeField]
     private GameObject[] obsObj;
@@ -20,8 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerObj, topTarget, bottomTarget;
 
-    [SerializeField]
-    private bool isMovingUp = true;
+    private bool isMovingUp = false;
 
 
 
@@ -33,7 +36,8 @@ public class GameManager : MonoBehaviour
 
 	void Start()
     {
-        obsObj[0].GetComponent<Animator>().SetTrigger("toleft");
+        isMovingUp = true;    
+        StartCoroutine(SetObstacle()); // bu recursive olarak dönüp dursun bakalım şimdilik
     }
 
 
@@ -43,29 +47,24 @@ public class GameManager : MonoBehaviour
             isMovingUp = !isMovingUp;
         }
 
+        // hedefe ulaşınca diğer hedefe yönlendirmek için boolu değiştirelim.
         if(playerObj.transform.position == bottomTarget.transform.position || playerObj.transform.position == topTarget.transform.position)
 		{
             isMovingUp = !isMovingUp;
 		}
 
         MovePlayer();
-        Debug.Log(isMovingUp);
     }
 
     public void MovePlayer()
 	{
 		if (isMovingUp)
-		{
-            
+		{        
             playerObj.transform.position = Vector2.MoveTowards(playerObj.transform.position, topTarget.transform.position, playerSpeed * Time.deltaTime);
-            //playerObj.transform.Translate(topTarget.transform.localPosition);
-            //playerObj.transform.position = Vector3.Lerp(playerObj.transform.position, topTarget.transform.position, playerSpeed*Time.deltaTime);
         }
 		else
 		{
             playerObj.transform.position = Vector2.MoveTowards(playerObj.transform.position, bottomTarget.transform.position, playerSpeed * Time.deltaTime);
-           // playerObj.transform.Translate(bottomTarget.transform.localPosition);
-            //playerObj.transform.position = Vector3.Lerp(playerObj.transform.position, bottomTarget.transform.position, playerSpeed*Time.deltaTime);
         }
 	}
 
@@ -87,77 +86,92 @@ public class GameManager : MonoBehaviour
             topTarget.GetComponent<SpriteRenderer>().enabled = false;
             bottomTarget.GetComponent<SpriteRenderer>().enabled = true;
             bottomTarget.transform.position = new Vector2(Random.Range(-1.5f,1.5f),bottomTarget.transform.position.y);
+            score++;
+            UiControl.instance.SetScoreText(score);
 		}
 		else if(!isMovingUp && bottomTarget.GetComponent<SpriteRenderer>().enabled)
 		{
             bottomTarget.GetComponent<SpriteRenderer>().enabled = false;
             topTarget.GetComponent<SpriteRenderer>().enabled = true;
             topTarget.transform.position = new Vector2(Random.Range(-1.5f, 1.5f), topTarget.transform.position.y);
+            score++;
+            UiControl.instance.SetScoreText(score);
         }
-	}
-
-    public void ObstacleReaction()
-	{
-       
 	}
 
     public void SingleObs(int no)
 	{
-        if(obsObj[no].transform.position.x >= 2)
+        if(obsObj[no].transform.position.x == 2)
 		{
             obsObj[no].GetComponent<Animator>().SetTrigger("toleft");
 		}
-		else
+		else if(obsObj[no].transform.position.x == -2)
 		{
             obsObj[no].GetComponent<Animator>().SetTrigger("toright");
         }
 	}
 
-    public void DoubleObs()
+
+    // bunları animatörle değil kodlarla yapsak daha kolay olacak yönetmesiiii.... 
+    private IEnumerator SetObstacle()
 	{
 
-	}
-
-    public void ContiniousObs()  // tıklayıp hemen geri dönsün bazen.. 
-	{
-
-	}
-
-    public void SetLevel()
-	{
+        Debug.Log("<color=green> coroutine çalışıyor </color>");
         if (score >= 3 && score < 10)
         {
-            obsNo = Random.Range(0,4);
+            obsNo = Random.Range(0, 4);
             SingleObs(obsNo);
+            obsInterval = Random.Range(1.3f,3f);
+            yield return new WaitForSeconds(obsInterval);
+            StartCoroutine(SetObstacle());
         }
-        else if(score >= 10)
+        else if (score >= 10)
         {
-            int secim = Random.Range(0,3);
-            if(secim == 0)
-			{
+            int secim = Random.Range(0, 3);  // burada ihtimalleri biraz daha matematiksel yapalım..
+            if (secim == 0)  // tek engel hareketi olsun.. 
+            {
                 obsNo = Random.Range(0, 4);
                 SingleObs(obsNo);
+                obsInterval = Random.Range(1.3f, 3f);
+                yield return new WaitForSeconds(obsInterval);
+                Debug.Log("<color=green>secim = " + secim + "</color>" );
             }
-            else if(secim == 1)
-			{
+            else if (secim == 1) // tek engelin karşıya gidip hemen geri dönmesi.. 
+            {
                 obsNo = Random.Range(0, 4);
                 SingleObs(obsNo);
-                obsNo = Random.Range(0, 4);
+                yield return new WaitForSeconds(1.3f); // bu 1f yetmezse artıracaz.. animatörün bok yemesi işte bunlar.. kodlaaaa bunlarrııııı
                 SingleObs(obsNo);
+                obsInterval = Random.Range(1.3f, 3f);
+                yield return new WaitForSeconds(obsInterval);
+                Debug.Log("<color=green>secim = " + secim + "</color>");
             }
-            else if(secim == 2)
-			{
+            else if (secim == 2) // iki engelin aralarında çok az bir süre ile nerdeyse aynı anda hareket etmesi. burada farklı engeller olmasını garantileyelim..
+            {
                 obsNo = Random.Range(0, 4);
                 SingleObs(obsNo);
+                yield return new WaitForSeconds(0.5f);
+                obsNo = (obsNo + 1) % 4; // farklı olmasını bu şekilde sistematik olarak garantiledik.. 0-1 / 1-2 / 2-3/ 3-0  gerekirse buna da 1 ekleyip aralıklı olmasını sağlarız.. 
+                SingleObs(obsNo);
+                obsInterval = Random.Range(1.3f, 3f);
+                yield return new WaitForSeconds(obsInterval);
+                Debug.Log("<color=green>secim = " + secim + "</color>");
+            }
+            StartCoroutine(SetObstacle());
+        }
+		else
+		{
+            yield return new WaitForSeconds(1.25f);
+            StartCoroutine(SetObstacle());
+        }
 
-            }
-		}
+        
 
     }
 
-   
 
 
-
-    
 }
+
+// seviye ilerleyince hareketler hızlanıp aralara bırakılan boşluklar kısalır.. zorlaşma böyle sağlanırr.. 
+// sürelere değişken atarız kontrol o şekilde sağlanır..

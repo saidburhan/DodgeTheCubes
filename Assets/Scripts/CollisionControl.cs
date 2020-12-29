@@ -13,6 +13,7 @@ public class CollisionControl : MonoBehaviour
 		if (collision.transform.tag == "target")
 		{
 			GameManager.instance.SetTargetPosition();
+
 		}
 	}
  
