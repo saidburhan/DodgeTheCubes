@@ -24,7 +24,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerObj, topTarget, bottomTarget;
 
+    [SerializeField]
+    private Transform [] obsStartPos;
+
+    [SerializeField]
+    private Vector2[] obsStartPosition;
+
     private bool isMovingUp = false;
+    private bool isGameOver = false;
+
+
 
 
 
@@ -36,47 +45,95 @@ public class GameManager : MonoBehaviour
 
 	void Start()
     {
-        isMovingUp = true;    
-        StartCoroutine(SetObstacle()); // bu recursive olarak dönüp dursun bakalım şimdilik
+        StartCoroutine(StartingSettings());
+
+        //for (int i = 0; i < obsObj.Length; i++) // oyunun ilk açılışında start pozisyonlarını kaydediyorum kii daha sonra restart gamelerde işe yarar
+        //{
+        //    obsStartPosition[i] = obsObj[i].transform.position;
+        //}
+
     }
 
 
     void Update()
     {
-		if (Input.GetMouseButtonDown(0)){
-            isMovingUp = !isMovingUp;
-        }
-
-        // hedefe ulaşınca diğer hedefe yönlendirmek için boolu değiştirelim.
-        if(playerObj.transform.position == bottomTarget.transform.position || playerObj.transform.position == topTarget.transform.position)
+		if (!isGameOver)
 		{
-            isMovingUp = !isMovingUp;
-		}
+            if (Input.GetMouseButtonDown(0))
+            {
+                isMovingUp = !isMovingUp;
+            }
+            // hedefe ulaşınca diğer hedefe yönlendirmek için boolu değiştirelim.
+            if (playerObj.transform.position == bottomTarget.transform.position || playerObj.transform.position == topTarget.transform.position)
+            {
+                isMovingUp = !isMovingUp;
+            }
 
-        MovePlayer();
+            MovePlayer();
+        }
+		
     }
 
     public void MovePlayer()
 	{
 		if (isMovingUp)
-		{        
-            playerObj.transform.position = Vector2.MoveTowards(playerObj.transform.position, topTarget.transform.position, playerSpeed * Time.deltaTime);
+		{
+            
+            Vector3 relativePos = topTarget.transform.position - playerObj.transform.position;
+            float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            playerObj.transform.rotation = Quaternion.Slerp(playerObj.transform.rotation, q, 1f);
+			playerObj.transform.position = Vector2.MoveTowards(playerObj.transform.position, topTarget.transform.position, playerSpeed * Time.deltaTime);
+            
         }
 		else
 		{
+            Vector3 relativePos = bottomTarget.transform.position - playerObj.transform.position;
+            float angle = Mathf.Atan2(relativePos.y, relativePos.x) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            playerObj.transform.rotation = Quaternion.Slerp(playerObj.transform.rotation, q, 1f);
             playerObj.transform.position = Vector2.MoveTowards(playerObj.transform.position, bottomTarget.transform.position, playerSpeed * Time.deltaTime);
         }
 	}
 
-    public void StartingSettings()
+    public void StartGame()
 	{
-        isMovingUp = true;
-        score = 0;
+        StartCoroutine(StartingSettings());
 	}
+
+    public IEnumerator StartingSettings()
+	{
+        topTarget.GetComponent<SpriteRenderer>().enabled = true;
+        bottomTarget.GetComponent<SpriteRenderer>().enabled = false;
+        playerObj.transform.position = new Vector2(0f, -1.7f);
+        score = 0;
+        StartCoroutine(SetObstacle());
+        for (int i = 0; i < obsObj.Length; i++)
+        {
+            obsObj[i].transform.position = obsStartPosition[i];
+            obsObj[i].GetComponent<Animator>().enabled = true;
+        }
+        yield return new WaitForSeconds(0.8f);
+        playerObj.GetComponent<CircleCollider2D>().enabled = true;
+        isGameOver = false;
+        isMovingUp = true;
+    }
 
     public void SetMovingState()
 	{
         isMovingUp = !isMovingUp;
+	}
+
+    public void GameOver()
+	{
+        isGameOver = true;
+        playerObj.GetComponent<CircleCollider2D>().enabled = false;
+        for(int i = 0; i < obsObj.Length; i++)
+		{
+            obsObj[i].GetComponent<Animator>().SetTrigger("reset");
+            obsObj[i].GetComponent<Animator>().enabled = false;
+		}
+        StopAllCoroutines();
 	}
 
     public void SetTargetPosition()

@@ -14,7 +14,12 @@ public class CollisionControl : MonoBehaviour
 		{
 			GameManager.instance.SetTargetPosition();
 
+		}else if(collision.transform.tag == "obs")
+		{
+			GameManager.instance.GameOver();
 		}
+
+
 	}
  
 
