@@ -57,15 +57,18 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
 		if (!isGameOver)
 		{
             if (Input.GetMouseButtonDown(0))
             {
+                
                 isMovingUp = !isMovingUp;
             }
             // hedefe ulaşınca diğer hedefe yönlendirmek için boolu değiştirelim.
             if (playerObj.transform.position == bottomTarget.transform.position || playerObj.transform.position == topTarget.transform.position)
             {
+                SetTargetPosition();
                 isMovingUp = !isMovingUp;
             }
 
@@ -103,8 +106,13 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartingSettings()
 	{
-        topTarget.GetComponent<SpriteRenderer>().enabled = true;
-        bottomTarget.GetComponent<SpriteRenderer>().enabled = false;
+        AnimationContoller.instance.TargetClap();
+        AnimationContoller.instance.PlayerRunAnim();
+        AnimationContoller.instance.NormalHeartAnim();
+        //topTarget.GetComponent<SpriteRenderer>().enabled = true;
+        topTarget.gameObject.SetActive(true);
+        AnimationContoller.instance.TargetClap();
+        bottomTarget.gameObject.SetActive(false);
         playerObj.transform.position = new Vector2(0f, -1.7f);
         score = 0;
         StartCoroutine(SetObstacle());
@@ -117,6 +125,7 @@ public class GameManager : MonoBehaviour
         playerObj.GetComponent<CircleCollider2D>().enabled = true;
         isGameOver = false;
         isMovingUp = true;
+        
     }
 
     public void SetMovingState()
@@ -128,6 +137,9 @@ public class GameManager : MonoBehaviour
 	{
         isGameOver = true;
         playerObj.GetComponent<CircleCollider2D>().enabled = false;
+        AnimationContoller.instance.TargetIdle();
+        AnimationContoller.instance.PlayerIdleAnim();
+        AnimationContoller.instance.BreakingHeartAnim();
         for(int i = 0; i < obsObj.Length; i++)
 		{
             obsObj[i].GetComponent<Animator>().SetTrigger("reset");
@@ -138,18 +150,22 @@ public class GameManager : MonoBehaviour
 
     public void SetTargetPosition()
 	{
-		if (isMovingUp && topTarget.GetComponent<SpriteRenderer>().enabled)
+		if (isMovingUp && topTarget.gameObject.activeSelf)
 		{
-            topTarget.GetComponent<SpriteRenderer>().enabled = false;
-            bottomTarget.GetComponent<SpriteRenderer>().enabled = true;
+            topTarget.gameObject.SetActive(false);
+            bottomTarget.gameObject.SetActive(true);
+            AnimationContoller.instance.TargetClap();
+            AnimationContoller.instance.NormalHeartAnim();
             bottomTarget.transform.position = new Vector2(Random.Range(-1.5f,1.5f),bottomTarget.transform.position.y);
             score++;
             UiControl.instance.SetScoreText(score);
 		}
-		else if(!isMovingUp && bottomTarget.GetComponent<SpriteRenderer>().enabled)
+		else if(!isMovingUp && bottomTarget.gameObject.activeSelf)
 		{
-            bottomTarget.GetComponent<SpriteRenderer>().enabled = false;
-            topTarget.GetComponent<SpriteRenderer>().enabled = true;
+            topTarget.gameObject.SetActive(true);
+            AnimationContoller.instance.TargetClap();
+            AnimationContoller.instance.NormalHeartAnim();
+            bottomTarget.gameObject.SetActive(false);
             topTarget.transform.position = new Vector2(Random.Range(-1.5f, 1.5f), topTarget.transform.position.y);
             score++;
             UiControl.instance.SetScoreText(score);

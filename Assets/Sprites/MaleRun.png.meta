@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: 13026f0f2d91136429e367fc3e210685
+guid: 931862a0d34c6f74ea0057f78cd9464c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5875309486377175700
-    second: brownman_0
+      213: -3502333558784026776
+    second: MaleRun_0
   - first:
-      213: -6815196196541344894
-    second: brownman_1
+      213: -5720020352280567986
+    second: MaleRun_1
   - first:
-      213: -2697206128518278590
-    second: brownman_2
+      213: 4485202507503638211
+    second: MaleRun_2
   - first:
-      213: -876516583559026059
-    second: brownman_3
+      213: -7653450242388140156
+    second: MaleRun_3
   - first:
-      213: 9118779611109217106
-    second: brownman_4
+      213: 2960379981803059319
+    second: MaleRun_4
+  - first:
+      213: 5086552050849176886
+    second: MaleRun_5
+  - first:
+      213: 9044594323646832028
+    second: MaleRun_6
+  - first:
+      213: -6505985694446682388
+    second: MaleRun_7
+  - first:
+      213: -5596724264370986067
+    second: MaleRun_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -138,13 +150,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brownman_0
+      name: MaleRun_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 14
-        width: 41
-        height: 51
+        x: 6
+        y: 20
+        width: 94
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49a8ef069da498150800000000000000
-      internalID: 5875309486377175700
+      spriteID: 8679fb73f26356fc0800000000000000
+      internalID: -3502333558784026776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brownman_1
+      name: MaleRun_1
       rect:
         serializedVersion: 2
-        x: 55
-        y: 14
-        width: 41
-        height: 51
+        x: 125
+        y: 20
+        width: 83
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2835f8eea2f8b61a0800000000000000
-      internalID: -6815196196541344894
+      spriteID: e4fdf4aabc76e90b0800000000000000
+      internalID: -5720020352280567986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brownman_2
+      name: MaleRun_2
       rect:
         serializedVersion: 2
-        x: 109
-        y: 14
-        width: 38
-        height: 51
+        x: 235
+        y: 20
+        width: 81
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24259a70159919ad0800000000000000
-      internalID: -2697206128518278590
+      spriteID: 3c6127dbae3ae3e30800000000000000
+      internalID: 4485202507503638211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brownman_3
+      name: MaleRun_3
       rect:
         serializedVersion: 2
-        x: 159
-        y: 14
-        width: 38
-        height: 51
+        x: 344
+        y: 20
+        width: 80
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57aa93dafccf5d3f0800000000000000
-      internalID: -876516583559026059
+      spriteID: 48fd354ed8b79c590800000000000000
+      internalID: -7653450242388140156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: brownman_4
+      name: MaleRun_4
       rect:
         serializedVersion: 2
-        x: 212
-        y: 13
-        width: 43
-        height: 53
+        x: 458
+        y: 17
+        width: 89
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,8 +248,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2535d313eb96c8e70800000000000000
-      internalID: 9118779611109217106
+      spriteID: 7787c8f98e1651920800000000000000
+      internalID: 2960379981803059319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaleRun_5
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 20
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63d566af320179640800000000000000
+      internalID: 5086552050849176886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaleRun_6
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 20
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9ddb76fd9ad48d70800000000000000
+      internalID: 9044594323646832028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaleRun_7
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 20
+        width: 82
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee7bb82b7816b5a0800000000000000
+      internalID: -6505985694446682388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaleRun_8
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 20
+        width: 95
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3ab5c2fe07452b0800000000000000
+      internalID: -5596724264370986067
       vertices: []
       indices: 
       edges: []
