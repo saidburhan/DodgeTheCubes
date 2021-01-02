@@ -10,7 +10,8 @@ public class AnimationContoller : MonoBehaviour
 	private bool isMale;  // 1 erkek 0 kız olsun.. 
 
     [SerializeField]
-    private Animator playerAnim,topTargetAnim,bottomTargetAnim,topHeartAnim,bottomHeartAnim;  // target karşıda bekleyen şahsiyet olacak artık kız veya erkek şimdi onları ayarlayalım..
+    private Animator playerAnim,topTargetAnim,bottomTargetAnim,topHeartAnim,bottomHeartAnim,
+		zombie1Anim, zombie2Anim,zombie3Anim,zombie4Anim;  // target karşıda bekleyen şahsiyet olacak artık kız veya erkek şimdi onları ayarlayalım..
 
 
 	private void Awake()
@@ -111,5 +112,23 @@ public class AnimationContoller : MonoBehaviour
 		topHeartAnim.SetTrigger("break");
 		bottomHeartAnim.SetTrigger("break");
 	}
-	
+
+	public void ZombieWalk(int zombiNo)
+	{
+		if (zombiNo == 1) zombie1Anim.SetTrigger("walk");
+		else if (zombiNo == 2) zombie2Anim.SetTrigger("walk");
+		else if (zombiNo == 3) zombie3Anim.SetTrigger("walk");
+		else if (zombiNo == 4) zombie4Anim.SetTrigger("walk");
+
+	}
+
+	public void ZombieIdle(int zombiNo)
+	{
+		if (zombiNo == 1) zombie1Anim.SetTrigger("idle");
+		else if (zombiNo == 2) zombie2Anim.SetTrigger("idle");
+		else if (zombiNo == 3) zombie3Anim.SetTrigger("idle");
+		else if (zombiNo == 4) zombie4Anim.SetTrigger("idle");
+
+	}
+
 }

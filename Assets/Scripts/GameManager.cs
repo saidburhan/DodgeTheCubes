@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
                 SetTargetPosition();
                 isMovingUp = !isMovingUp;
             }
-
+            
             MovePlayer();
         }
 		
@@ -106,12 +106,13 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartingSettings()
 	{
+
         AnimationContoller.instance.TargetClap();
         AnimationContoller.instance.PlayerRunAnim();
         AnimationContoller.instance.NormalHeartAnim();
-        //topTarget.GetComponent<SpriteRenderer>().enabled = true;
         topTarget.gameObject.SetActive(true);
         AnimationContoller.instance.TargetClap();
+        bottomTarget.gameObject.SetActive(true);
         bottomTarget.gameObject.SetActive(false);
         playerObj.transform.position = new Vector2(0f, -1.7f);
         score = 0;
@@ -119,7 +120,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < obsObj.Length; i++)
         {
             obsObj[i].transform.position = obsStartPosition[i];
+            obsObj[i].transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
             obsObj[i].GetComponent<Animator>().enabled = true;
+            obsObj[i].GetComponent<BoxCollider2D>().enabled = false;
         }
         yield return new WaitForSeconds(0.8f);
         playerObj.GetComponent<CircleCollider2D>().enabled = true;
@@ -143,6 +146,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < obsObj.Length; i++)
 		{
             obsObj[i].GetComponent<Animator>().SetTrigger("reset");
+            AnimationContoller.instance.ZombieIdle(i+1);
             obsObj[i].GetComponent<Animator>().enabled = false;
 		}
         StopAllCoroutines();
@@ -174,13 +178,16 @@ public class GameManager : MonoBehaviour
 
     public void SingleObs(int no)
 	{
+        
         if(obsObj[no].transform.position.x == 2)
 		{
             obsObj[no].GetComponent<Animator>().SetTrigger("toleft");
-		}
+            AnimationContoller.instance.ZombieWalk(no+1);
+        }
 		else if(obsObj[no].transform.position.x == -2)
 		{
             obsObj[no].GetComponent<Animator>().SetTrigger("toright");
+            AnimationContoller.instance.ZombieWalk(no+1);
         }
 	}
 
@@ -188,10 +195,17 @@ public class GameManager : MonoBehaviour
     // bunları animatörle değil kodlarla yapsak daha kolay olacak yönetmesiiii.... 
     private IEnumerator SetObstacle()
 	{
-
+        if(score == 2)
+		{
+            for (int i = 0; i < obsObj.Length; i++)
+            {
+                obsObj[i].GetComponent<BoxCollider2D>().enabled = true;
+            }
+        }
         Debug.Log("<color=green> coroutine çalışıyor </color>");
         if (score >= 3 && score < 10)
         {
+
             obsNo = Random.Range(0, 4);
             SingleObs(obsNo);
             obsInterval = Random.Range(1.3f,3f);

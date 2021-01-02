@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: be6f7add8bc187d44824d621f74700c5
+guid: 0605427ffa89ac54d92aaafb2c743d2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6763521223491987606
-    second: breakingheart-02_0
+      213: 3207686709657892971
+    second: zombi-06_0
   - first:
-      213: 3122504773961417400
-    second: breakingheart-02_1
+      213: 3640225624308491135
+    second: zombi-06_1
   - first:
-      213: 2160039328103223152
-    second: breakingheart-02_2
+      213: -7530080296682459676
+    second: zombi-06_2
   - first:
-      213: 7713703716316574305
-    second: breakingheart-02_4
+      213: -1714110236889607159
+    second: zombi-06_3
   - first:
-      213: -6653723080624221682
-    second: breakingheart-02_6
+      213: 1749410895459593345
+    second: zombi-06_4
+  - first:
+      213: -7560813669363085607
+    second: zombi-06_5
+  - first:
+      213: 2894915857173793049
+    second: zombi-06_6
+  - first:
+      213: -3769366057999726152
+    second: zombi-06_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -138,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: breakingheart-02_0
+      name: zombi-06_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 14
-        width: 174
-        height: 153
+        x: 13
+        y: 7
+        width: 119
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6982e05d7badcdd50800000000000000
-      internalID: 6763521223491987606
+      spriteID: b6876ef311ef38c20800000000000000
+      internalID: 3207686709657892971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: breakingheart-02_1
+      name: zombi-06_1
       rect:
         serializedVersion: 2
-        x: 218
-        y: 15
-        width: 188
-        height: 150
+        x: 159
+        y: 7
+        width: 110
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b28e655c8d555b20800000000000000
-      internalID: 3122504773961417400
+      spriteID: f73ae272beda48230800000000000000
+      internalID: 3640225624308491135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: breakingheart-02_2
+      name: zombi-06_2
       rect:
         serializedVersion: 2
-        x: 443
-        y: 16
-        width: 207
-        height: 148
+        x: 301
+        y: 7
+        width: 103
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07f477413500afd10800000000000000
-      internalID: 2160039328103223152
+      spriteID: 4ede212cdd7cf7790800000000000000
+      internalID: -7530080296682459676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: breakingheart-02_4
+      name: zombi-06_3
       rect:
         serializedVersion: 2
-        x: 689
-        y: 18
-        width: 229
-        height: 144
+        x: 433
+        y: 7
+        width: 114
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162f8a939a49c0b60800000000000000
-      internalID: 7713703716316574305
+      spriteID: 904955042d14638e0800000000000000
+      internalID: -1714110236889607159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: breakingheart-02_6
+      name: zombi-06_4
       rect:
         serializedVersion: 2
-        x: 938
-        y: 18
-        width: 247
-        height: 144
+        x: 577
+        y: 7
+        width: 129
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,8 +245,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0253917c1a39a3a0800000000000000
-      internalID: -6653723080624221682
+      spriteID: 18c211ec0f7274810800000000000000
+      internalID: 1749410895459593345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombi-06_5
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 7
+        width: 114
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de02b0d608921790800000000000000
+      internalID: -7560813669363085607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombi-06_6
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 7
+        width: 104
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9194d7952aecc2820800000000000000
+      internalID: 2894915857173793049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombi-06_7
+      rect:
+        serializedVersion: 2
+        x: 1021
+        y: 7
+        width: 109
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b9038c8a8580bbc0800000000000000
+      internalID: -3769366057999726152
       vertices: []
       indices: 
       edges: []
