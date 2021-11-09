@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tilesheet_5
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 399361907830907467, guid: 9d3673bc317ac7a4cbff195e10569d5d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8442702, b: 0, a: 1}
   m_Transform:
     e00: 1
     e01: 0
